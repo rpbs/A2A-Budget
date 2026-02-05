@@ -1,0 +1,29 @@
+{
+  "name": "Project Discovery Agent",
+  "description": "An Agent that helps to extract information from the user related to software engineer project",
+  "url": "https://a2a-project-discovery-dubnh3a7h5f3dkc9.brazilsouth-01.azurewebsites.net/a2a/discovery",
+  "iconUrl": null,
+  "provider": null,
+  "version": "1.0",
+  "protocolVersion": "0.3.0",
+  "documentationUrl": null,
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false,
+    "stateTransitionHistory": false,
+    "extensions": []
+  },
+  "securitySchemes": null,
+  "security": null,
+  "defaultInputModes": [
+    "text"
+  ],
+  "defaultOutputModes": [
+    "text"
+  ],
+  "skills": [],
+  "supportsAuthenticatedExtendedCard": false,
+  "additionalInterfaces": [],
+  "preferredTransport": "JSONRPC",
+  "signatures": null
+}

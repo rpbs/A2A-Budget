@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="A2A-Budget/A2A-Budget.csproj" />
+  <Project Path="A2A-Tech/A2A-Tech.csproj" Id="06c491ff-53b0-40fa-9fb5-cdb71e4e76d5" />
+</Solution>

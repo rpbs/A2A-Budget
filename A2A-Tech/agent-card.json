@@ -1,0 +1,29 @@
+{
+  "name": "Agent for creating budget scope for projects in azure",
+  "description": "An Agent that helps to create budget scopes for applications that will be hosted on Azure",
+  "url": "https://a2a-tech-discovery-akbneacqgebuc7fe.brazilsouth-01.azurewebsites.net/a2a/tech",
+  "iconUrl": null,
+  "provider": null,
+  "version": "1.0",
+  "protocolVersion": "0.3.0",
+  "documentationUrl": null,
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false,
+    "stateTransitionHistory": false,
+    "extensions": []
+  },
+  "securitySchemes": null,
+  "security": null,
+  "defaultInputModes": [
+    "text"
+  ],
+  "defaultOutputModes": [
+    "text"
+  ],
+  "skills": [],
+  "supportsAuthenticatedExtendedCard": false,
+  "additionalInterfaces": [],
+  "preferredTransport": "JSONRPC",
+  "signatures": null
+}

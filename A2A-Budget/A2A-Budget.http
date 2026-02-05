@@ -1,0 +1,6 @@
+@A2A_Budget_HostAddress = http://localhost:5070
+
+GET {{A2A_Budget_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
