@@ -1,10 +1,10 @@
 # A2A Budget - Agente de Descoberta de Projeto
 
-Uma aplicação ASP.NET Core que implementa um agente de IA para extrair e analisar requisitos de projetos de engenharia de software através do protocolo Agent-to-Agent (A2A).
+nesse projeto há duas web api que expoem um agent A2A.
 
-## O que é?
+no A2A-Buget, ele tenta extrair do usuário informações como, orçamento, descrição do que o usuário necessita (desde um simple blog a um e-commerce por exemplo), tempo que ele espera do projeto ser concluído e outras coiss
 
-O **Agente de Descoberta de Projeto** ajuda a coletar informações sobre um projeto de software que um cliente deseja construir. Ele usa Inteligência Artificial para entender o que o cliente precisa e extrai informações importantes como orçamento, objetivos, prazos e tipo de mercado.
+no A2A-Tech, recebe essas informações e decide de acordo com a complexidade do projeto e o orçamento, verifica quais recursos do azure é recomendável para ser usado.
 
 ## Recursos Principais
 
@@ -20,7 +20,3 @@ O **Agente de Descoberta de Projeto** ajuda a coletar informações sobre um pro
 - .NET 10.0 ou superior
 - Recurso Azure OpenAI configurado
 - Credenciais do Azure (API Key)
-
-## Instalação
-
-1. **Clone o repositório:**
