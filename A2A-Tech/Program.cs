@@ -28,7 +28,7 @@ IChatClient chatClient = new AzureOpenAIClient(
 builder.Services.AddSingleton(chatClient);
 
 const string systemInstructions = "You are an agent responsible for creating budget scopes for applications that will be hosted on Azure. " +
-    "Based on financial budget information and project objectives, " +
+    "Based on financial budget information and project objectives (goals of it), " +
     "you will need to analyze the complexity, select the Azure services necessary to achieve the client's goals, and return this information to the user.";
 
 var discoveryAgent = builder.AddAIAgent("tech-descovery", instructions: systemInstructions);

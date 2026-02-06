@@ -27,9 +27,9 @@ IChatClient chatClient = new AzureOpenAIClient(
 
 builder.Services.AddSingleton(chatClient);
 
-const string systemInstructions = "You help to extract information from a software enginier project that a client wants to" +
-    " be build you should be able to get budget, goal of the project and what kind of system market, " +
-    "you should be able to return this information structure to another agent through A2A.";
+const string systemInstructions = "You help to extract information from a software enginier project that a client wants to be build. " +
+    "You should be able to extract budget and goal of the project. You don't need ask more than these 2 questions." +
+    "You should be able to return this information structure to another agent through A2A.";
 
 var discoveryAgent = builder.AddAIAgent("project-descovery", instructions: systemInstructions);
 
