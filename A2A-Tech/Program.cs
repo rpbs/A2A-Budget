@@ -1,7 +1,6 @@
 using A2A;
 using A2A.AspNetCore;
 using Azure.AI.OpenAI;
-using Azure.Identity;
 using Microsoft.Agents.AI.Hosting;
 using Microsoft.Extensions.AI;
 
@@ -13,7 +12,7 @@ builder.Services.AddSwaggerGen();
 string endpoint = builder.Configuration["AZURE_OPENAI_ENDPOINT"]
     ?? throw new InvalidOperationException("AZURE_OPENAI_ENDPOINT is not set.");
 
-string deploymentName = "gpt-4.1-mini";
+string deploymentName = builder.Configuration["AZURE_FOUNDRY_PROJECT_DEPLOYMENT_NAME"] ?? "gpt-4.1-mini";
 
 string apiKey = builder.Configuration["AZURE_API_KEY"]
     ?? throw new InvalidOperationException("AZURE_API_KEY is not set.");
