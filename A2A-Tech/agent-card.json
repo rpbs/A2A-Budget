@@ -21,7 +21,42 @@
   "defaultOutputModes": [
     "text"
   ],
-  "skills": [],
+  "skills": [
+    {
+      "id": "getAzureRetailPricing",
+      "name": "getAzureRetailPricing",
+      "description": "Retrieve Azure service retail pricing by service name and region. Use this to get current pricing for Virtual Machines, SQL Database, App Service, Storage, and other Azure services.",
+      "tags": [],
+      "endpoints": [
+        {
+          "method": "GET",
+          "url": "/pricing",
+          "parameters": [
+            {
+              "name": "service",
+              "in": "query",
+              "required": true,
+              "type": "string",
+              "description": "Azure service name (e.g., 'Virtual Machines', 'SQL Database', 'App Service')"
+            },
+            {
+              "name": "region",
+              "in": "query",
+              "required": true,
+              "type": "string",
+              "description": "Azure region (e.g., 'westus', 'eastus', 'westeurope')"
+            }
+          ],
+          "responseType": "object",
+          "responseExample": {
+            "service": "Virtual Machines",
+            "region": "westus",
+            "unitPrice": 0.0296
+          }
+        }
+      ]
+    }
+  ],
   "supportsAuthenticatedExtendedCard": false,
   "additionalInterfaces": [],
   "preferredTransport": "JSONRPC",

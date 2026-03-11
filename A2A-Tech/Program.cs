@@ -3,6 +3,8 @@ using A2A.AspNetCore;
 using Azure.AI.OpenAI;
 using Microsoft.Agents.AI.Hosting;
 using Microsoft.Extensions.AI;
+using A2A_Tech.Services;
+using Microsoft.Extensions.Caching.Memory;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,9 +28,17 @@ IChatClient chatClient = new AzureOpenAIClient(
 
 builder.Services.AddSingleton(chatClient);
 
-const string systemInstructions = "You are an agent responsible for creating budget scopes for applications that will be hosted on Azure. " +
-    "Based on financial budget information and project objectives (goals of it), " +
-    "you will need to analyze the complexity, select the Azure services necessary to achieve the client's goals, and return this information to the user.";
+// Register pricing service and HttpClient factory
+builder.Services.AddHttpClient();
+builder.Services.AddSingleton<IMemoryCache, MemoryCache>();
+builder.Services.AddSingleton<IPricingService, AzureRetailPricingService>();
+
+const string systemInstructions = 
+    "You are an agent responsible for creating budget scopes for applications that will be hosted on Azure. " +
+    "based on budget value information and project objectives (goals of it), " +
+    "you will need to analyze the complexity, select the Azure services necessary to achieve the client's goals, and return this information to the user of how budget will be spent on each azure service per month. " +
+    "to retrieve pricing information for Azure services, call the GET /pricing endpoint with query parameters: 'service' ('Virtual Machines', 'SQL Database', ...) and 'region' ('westus', 'eastus', ...). " +
+    "use this pricing data to build accurate budget scopes for the recommended services.";
 
 var discoveryAgent = builder.AddAIAgent("tech-descovery", instructions: systemInstructions);
 
@@ -46,6 +56,7 @@ AgentCard agentCard = new()
     Capabilities = new() { Streaming = true }
 };
 
+// isso disponibliza os endpoints que são necessários para que o agente possa se comunicar com outros agentes.
 app.MapA2A(discoveryAgent, "/a2a/tech", agentCard: agentCard);
 
 app.MapGet(".well-known/agent-card.json", () => {
@@ -53,6 +64,24 @@ app.MapGet(".well-known/agent-card.json", () => {
     var json = File.ReadAllText("agent-card.json");
 
     return json;
+});
+
+// Simple pricing endpoint for agents or tools to query retail prices.
+// Example: GET /pricing?service=Virtual%20Machines&region=westus
+app.MapGet("/pricing", async (IPricingService pricingService, string service, string region) =>
+{
+    if (string.IsNullOrWhiteSpace(service) || string.IsNullOrWhiteSpace(region))
+    {
+        return Results.BadRequest(new { error = "query parameters 'service' and 'region' are required" });
+    }
+
+    var price = await pricingService.GetUnitPriceAsync(service, region);
+    if (price is null)
+    {
+        return Results.NotFound(new { service, region });
+    }
+
+    return Results.Ok(new { service, region, unitPrice = price });
 });
 
 app.Run();
