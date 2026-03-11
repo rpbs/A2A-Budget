@@ -35,10 +35,11 @@ builder.Services.AddSingleton<IPricingService, AzureRetailPricingService>();
 
 const string systemInstructions = 
     "You are an agent responsible for creating budget scopes for applications that will be hosted on Azure. " +
-    "based on budget value information and project objectives (goals of it), " +
+    "based on budget (monthly) value information and project objectives (goals of it), " +
     "you will need to analyze the complexity, select the Azure services necessary to achieve the client's goals, and return this information to the user of how budget will be spent on each azure service per month. " +
     "to retrieve pricing information for Azure services, call the GET /pricing endpoint with query parameters: 'service' ('Virtual Machines', 'SQL Database', ...) and 'region' ('westus', 'eastus', ...). " +
-    "use this pricing data to build accurate budget scopes for the recommended services.";
+    "At the end use the pricing data and the budget to build accurate budget scopes for the recommended services. " +
+    "Provide the exact pricing numbers for each service tier and help with an estimated monthly cost breakdown.";
 
 var discoveryAgent = builder.AddAIAgent("tech-descovery", instructions: systemInstructions);
 
